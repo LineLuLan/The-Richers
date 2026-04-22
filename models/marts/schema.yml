@@ -1,0 +1,40 @@
+version: 2
+
+# ============================================================
+# MART MODELS
+# ============================================================
+
+models:
+  - name: mart_sales_customer
+    description: >
+      [MART 1] Doanh thu & Chân dung Khách hàng.
+      Fact: stg_orders. Dimensions: customers, geography, promotions.
+      Aggregated: int_order_items_aggregated, int_payments_aggregated.
+      Dùng cho: phân tích hành vi theo độ tuổi, địa lý, kênh mua hàng.
+    columns:
+      - name: order_id
+        tests:
+          - unique
+          - not_null
+
+  - name: mart_product_returns
+    description: >
+      [MART 2] Hiệu suất Sản phẩm & Rủi ro Hoàn trả.
+      Center: stg_products. Aggregated: sales, returns, reviews, inventory.
+      Dùng cho: phân tích biên lợi nhuận, tỷ lệ trả hàng, đánh giá sản phẩm.
+    columns:
+      - name: product_id
+        tests:
+          - unique
+          - not_null
+
+  - name: mart_temporal_operations
+    description: >
+      [MART 3] Dòng thời gian, Vận hành & Tồn kho.
+      Spine: int_sales_daily. Joined: web_traffic, shipments, inventory.
+      Dùng cho: xu hướng mùa vụ, tỷ lệ chuyển đổi, cảnh báo stockout.
+    columns:
+      - name: sale_date
+        tests:
+          - unique
+          - not_null
