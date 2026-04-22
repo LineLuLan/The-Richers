@@ -1,0 +1,65 @@
+version: 2
+
+# ============================================================
+# INTERMEDIATE MODELS
+# ============================================================
+models:
+  - name: int_order_items_aggregated
+    description: >
+      Aggregate chi tiết đơn hàng (stg_order_items) theo order_id.
+      Bắt buộc GROUP BY trước để tránh fan-out khi join vào orders.
+    columns:
+      - name: order_id
+        description: Khóa chính — 1 dòng / đơn hàng
+        tests: [unique, not_null]
+      - name: gross_revenue
+        description: Tổng doanh thu trước chiết khấu
+      - name: net_revenue
+        description: Tổng doanh thu sau chiết khấu
+
+  - name: int_payments_aggregated
+    description: >
+      Aggregate thanh toán (stg_payments) theo order_id.
+      Xử lý trường hợp 1 đơn hàng có nhiều lần thanh toán.
+    columns:
+      - name: order_id
+        tests: [unique, not_null]
+
+  - name: int_order_items_by_product
+    description: >
+      Aggregate doanh thu và số lượng bán theo product_id từ stg_order_items.
+    columns:
+      - name: product_id
+        tests: [unique, not_null]
+
+  - name: int_returns_by_product
+    description: >
+      Aggregate hành vi trả hàng (stg_returns) theo product_id.
+      Bao gồm phân phối lý do trả hàng.
+    columns:
+      - name: product_id
+        tests: [unique, not_null]
+
+  - name: int_inventory_latest
+    description: >
+      Lấy snapshot tồn kho mới nhất cho mỗi sản phẩm bằng ROW_NUMBER.
+      Tránh duplicate khi bảng inventory có nhiều bản ghi theo tháng.
+    columns:
+      - name: product_id
+        tests: [unique, not_null]
+
+  - name: int_web_traffic_daily
+    description: >
+      Tổng hợp lưu lượng web theo ngày, breakdown theo kênh traffic.
+    columns:
+      - name: traffic_date
+        tests: [unique, not_null]
+
+  - name: int_sales_daily
+    description: >
+      Tổng hợp doanh thu từ stg_sales theo ngày.
+      Là spine (trục thời gian) cho mart_temporal_operations.
+    columns:
+      - name: sale_date
+        tests: [unique, not_null]
+

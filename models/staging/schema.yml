@@ -1,0 +1,224 @@
+version: 2
+
+sources:
+  - name: raw
+    database: test
+    schema: raw
+    tables:
+      - name: customers
+      - name: geography
+      - name: inventory
+      - name: order_items
+      - name: orders
+      - name: payments
+      - name: products
+      - name: promotions
+      - name: returns
+      - name: reviews
+      - name: sales
+      - name: shipments
+      - name: web_traffic
+
+models:
+  - name: stg_customers
+    description: Staging model for customer information.
+    columns:
+      - name: customer_id
+        description: Primary key for customers.
+        tests:
+          - unique
+          - not_null
+
+  - name: stg_geography
+    description: Staging model for geography information.
+    columns:
+      - name: geography_id
+        description: Primary key for geography.
+        tests:
+          - unique
+          - not_null
+
+  - name: stg_products
+    description: Staging model for product information.
+    columns:
+      - name: product_id
+        description: Primary key for products.
+        tests:
+          - unique
+          - not_null
+
+  - name: stg_inventory
+    description: Inventory records by product and month.
+    columns:
+      - name: inventory_id
+        description: Primary key for inventory records.
+        tests:
+          - unique
+          - not_null
+      - name: product_id
+        description: Foreign key to products.
+        tests:
+          - not_null
+          - relationships:
+                arguments:
+                  to: ref('stg_products')
+                  column_name: product_id
+
+  - name: stg_orders
+    description: Staging model for order information.
+    columns:
+      - name: order_id
+        description: Primary key for orders.
+        tests:
+          - unique
+          - not_null
+      - name: customer_id
+        description: Foreign key to customers.
+        tests:
+          - not_null
+          - relationships:
+                arguments:
+                  to: ref('stg_customers')
+                  column_name: customer_id
+
+  - name: stg_order_items
+    description: Line items associated with orders.
+    columns:
+      - name: order_item_id
+        description: Primary key for order items.
+        tests:
+          - unique
+          - not_null
+      - name: order_id
+        description: Foreign key to orders.
+        tests:
+          - not_null
+          - relationships:
+                arguments:
+                  to: ref('stg_orders')
+                  column_name: order_id
+      - name: product_id
+        description: Foreign key to products.
+        tests:
+          - not_null
+          - relationships:
+                arguments:
+                  to: ref('stg_products')
+                  column_name: product_id
+      - name: promotion_id
+        description: Foreign key to promotions.
+        tests:
+          - relationships:
+                arguments:
+                  to: ref('stg_promotions')
+                  column_name: promotion_id
+
+  - name: stg_payments
+    description: Payment information for orders.
+    columns:
+      - name: payment_id
+        description: Primary key for payments.
+        tests:
+          - unique
+          - not_null
+      - name: order_id
+        description: One-to-one relationship with orders.
+        tests:
+          - unique
+          - not_null
+          - relationships:
+                arguments:
+                  to: ref('stg_orders')
+                  column_name: order_id
+
+  - name: stg_shipments
+    description: Shipment information for orders.
+    columns:
+      - name: shipment_id
+        description: Primary key for shipments.
+        tests:
+          - unique
+          - not_null
+      - name: order_id
+        description: Relationship with orders, usually one shipment per order.
+        tests:
+          - not_null
+          - relationships:
+                arguments:
+                  to: ref('stg_orders')
+                  column_name: order_id
+
+  - name: stg_returns
+    description: Return information for returned orders.
+    columns:
+      - name: return_id
+        description: Primary key for returns.
+        tests:
+          - unique
+          - not_null
+      - name: order_id
+        description: Foreign key to orders.
+        tests:
+          - not_null
+          - relationships:
+                arguments:
+                  to: ref('stg_orders')
+                  column_name: order_id
+
+  - name: stg_reviews
+    description: Customer reviews for delivered orders.
+    columns:
+      - name: review_id
+        description: Primary key for reviews.
+        tests:
+          - unique
+          - not_null
+      - name: order_id
+        description: Foreign key to orders.
+        tests:
+          - not_null
+          - relationships:
+                arguments:
+                  to: ref('stg_orders')
+                  column_name: order_id
+      - name: customer_id
+        description: Foreign key to customers.
+        tests:
+          - relationships:
+                arguments:
+                  to: ref('stg_customers')
+                  column_name: customer_id
+
+  - name: stg_promotions
+    description: Promotion or discount campaigns.
+    columns:
+      - name: promotion_id
+        description: Primary key for promotions.
+        tests:
+          - unique
+          - not_null
+
+  - name: stg_sales
+    description: Sales fact table.
+    columns:
+      - name: sale_id
+        description: Primary key for sales.
+        tests:
+          - unique
+          - not_null
+      - name: order_id
+        description: Foreign key to orders.
+        tests:
+          - relationships:
+                arguments:
+                  to: ref('stg_orders')
+                  column_name: order_id
+
+  - name: stg_web_traffic
+    description: Website traffic and session metrics.
+    columns:
+      - name: session_id
+        description: Primary key for web sessions.
+        tests:
+          - unique
+          - not_null
