@@ -1,8 +1,10 @@
 SELECT 
     g.region,
-    SUM(s.revenue) AS total_revenue
-FROM raw.sales s
+    SUM(p.payment_value) AS total_revenue
+FROM raw.orders o
+JOIN raw.payments p 
+    ON o.order_id = p.order_id
 JOIN raw.geography g
-    ON s.customer_id = g.customer_id   -- sửa nếu key khác
+    ON o.zip = g.zip
 GROUP BY g.region
 ORDER BY total_revenue DESC;
