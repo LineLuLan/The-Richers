@@ -1,0 +1,160 @@
+{
+  "products": {
+    "00_loaded": {
+      "n_before": 2412,
+      "n_after": 2412,
+      "n_dropped": 0,
+      "note": "shape=(2412, 8)"
+    },
+    "01_add_gross_margin": {
+      "n_before": 2412,
+      "n_after": 2412,
+      "n_dropped": 0,
+      "note": "gross_margin = (price-cogs)/price"
+    }
+  },
+  "customers": {
+    "00_loaded": {
+      "n_before": 121930,
+      "n_after": 121930,
+      "n_dropped": 0,
+      "note": "shape=(121930, 7)"
+    }
+  },
+  "promotions": {
+    "00_loaded": {
+      "n_before": 50,
+      "n_after": 50,
+      "n_dropped": 0,
+      "note": "shape=(50, 10)"
+    },
+    "01_add_duration": {
+      "n_before": 50,
+      "n_after": 50,
+      "n_dropped": 0,
+      "note": "promo_duration_days = end_date - start_date"
+    }
+  },
+  "geography": {
+    "00_loaded": {
+      "n_before": 39948,
+      "n_after": 39948,
+      "n_dropped": 0,
+      "note": "shape=(39948, 4)"
+    }
+  },
+  "orders": {
+    "00_loaded": {
+      "n_before": 646945,
+      "n_after": 646945,
+      "n_dropped": 0,
+      "note": "shape=(646945, 8)"
+    },
+    "01_flag_order_before_signup": {
+      "n_before": 646945,
+      "n_after": 646945,
+      "n_dropped": 0,
+      "note": "477,453 đơn (~73.8%) flagged"
+    },
+    "02_add_revenue_eligible": {
+      "n_before": 646945,
+      "n_after": 646945,
+      "n_dropped": 0,
+      "note": "580,208 đơn revenue-eligible"
+    }
+  },
+  "order_items": {
+    "00_loaded": {
+      "n_before": 714669,
+      "n_after": 714669,
+      "n_dropped": 0,
+      "note": "shape=(714669, 7)"
+    },
+    "01_drop_promo_id_2": {
+      "n_before": 714669,
+      "n_after": 714669,
+      "n_dropped": 0,
+      "note": "99.97% null + chỉ 2 unique values → drop"
+    },
+    "02_add_derived": {
+      "n_before": 714669,
+      "n_after": 714669,
+      "n_dropped": 0,
+      "note": "line_revenue, discount_pct"
+    }
+  },
+  "payments": {
+    "00_loaded": {
+      "n_before": 646945,
+      "n_after": 646945,
+      "n_dropped": 0,
+      "note": "shape=(646945, 4)"
+    }
+  },
+  "shipments": {
+    "00_loaded": {
+      "n_before": 566067,
+      "n_after": 566067,
+      "n_dropped": 0,
+      "note": "shape=(566067, 4)"
+    },
+    "01_add_lead_time": {
+      "n_before": 566067,
+      "n_after": 566067,
+      "n_dropped": 0,
+      "note": "delivery_lead_time"
+    }
+  },
+  "returns": {
+    "00_loaded": {
+      "n_before": 39939,
+      "n_after": 39939,
+      "n_dropped": 0,
+      "note": "shape=(39939, 7)"
+    }
+  },
+  "reviews": {
+    "00_loaded": {
+      "n_before": 113551,
+      "n_after": 113551,
+      "n_dropped": 0,
+      "note": "shape=(113551, 7)"
+    }
+  },
+  "sales_train": {
+    "00_loaded": {
+      "n_before": 3833,
+      "n_after": 3833,
+      "n_dropped": 0,
+      "note": "shape=(3833, 3)"
+    }
+  },
+  "inventory": {
+    "00_loaded": {
+      "n_before": 60247,
+      "n_after": 60247,
+      "n_dropped": 0,
+      "note": "shape=(60247, 17)"
+    },
+    "01_drop_redundant": {
+      "n_before": 60247,
+      "n_after": 60247,
+      "n_dropped": 0,
+      "note": "drop ['product_name', 'category', 'segment']"
+    }
+  },
+  "web_traffic": {
+    "00_loaded": {
+      "n_before": 3652,
+      "n_after": 3652,
+      "n_dropped": 0,
+      "note": "shape=(3652, 7)"
+    },
+    "01_verify_grain": {
+      "n_before": 3652,
+      "n_after": 3652,
+      "n_dropped": 0,
+      "note": "unique per date: True"
+    }
+  }
+}
