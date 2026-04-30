@@ -1,0 +1,23 @@
+table,action,n_before,n_after,n_dropped,note
+products,00_loaded,2412,2412,0,"shape=(2412, 8)"
+products,01_add_gross_margin,2412,2412,0,gross_margin = (price-cogs)/price
+customers,00_loaded,121930,121930,0,"shape=(121930, 7)"
+promotions,00_loaded,50,50,0,"shape=(50, 10)"
+promotions,01_add_duration,50,50,0,promo_duration_days = end_date - start_date
+geography,00_loaded,39948,39948,0,"shape=(39948, 4)"
+orders,00_loaded,646945,646945,0,"shape=(646945, 8)"
+orders,01_flag_order_before_signup,646945,646945,0,"477,453 đơn (~73.8%) flagged"
+orders,02_add_revenue_eligible,646945,646945,0,"580,208 đơn revenue-eligible"
+order_items,00_loaded,714669,714669,0,"shape=(714669, 7)"
+order_items,01_drop_promo_id_2,714669,714669,0,99.97% null + chỉ 2 unique values → drop
+order_items,02_add_derived,714669,714669,0,"line_revenue, discount_pct"
+payments,00_loaded,646945,646945,0,"shape=(646945, 4)"
+shipments,00_loaded,566067,566067,0,"shape=(566067, 4)"
+shipments,01_add_lead_time,566067,566067,0,delivery_lead_time
+returns,00_loaded,39939,39939,0,"shape=(39939, 7)"
+reviews,00_loaded,113551,113551,0,"shape=(113551, 7)"
+sales_train,00_loaded,3833,3833,0,"shape=(3833, 3)"
+inventory,00_loaded,60247,60247,0,"shape=(60247, 17)"
+inventory,01_drop_redundant,60247,60247,0,"drop ['product_name', 'category', 'segment']"
+web_traffic,00_loaded,3652,3652,0,"shape=(3652, 7)"
+web_traffic,01_verify_grain,3652,3652,0,unique per date: True
