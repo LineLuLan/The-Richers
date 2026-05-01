@@ -1,9 +1,9 @@
 Target,Model,MAE,RMSE,R²,MAPE
-Revenue,Baseline only,"     643,284","     851,904",0.7310,0.2708
-Revenue,XGBoost tuned,"     706,220","     945,598",0.6593,0.2682
-Revenue,CatBoost tuned,"     708,315","     947,588",0.6451,0.2616
-Revenue,Ensemble blend,"     696,181","     934,780",0.6620,0.2596
-COGS,Baseline only,"     553,354","     741,556",0.7179,0.2704
-COGS,XGBoost tuned,"     594,096","     808,610",0.6643,0.2571
-COGS,CatBoost tuned,"     618,650","     829,793",0.6419,0.2682
-COGS,Ensemble blend,"     592,061","     804,821",0.6665,0.2554
+Revenue,Baseline only,"     597,287","     801,326",0.7663,0.2313
+Revenue,XGBoost tuned,"     586,738","     817,443",0.7560,0.2033
+Revenue,CatBoost tuned,"     612,788","     831,753",0.7471,0.2169
+Revenue,Ensemble blend,"     583,568","     813,050",0.7587,0.2015
+COGS,Baseline only,"     488,679","     674,974",0.7821,0.2113
+COGS,XGBoost tuned,"     547,284","     765,326",0.7156,0.2118
+COGS,CatBoost tuned,"     556,726","     768,096",0.7109,0.2124
+COGS,Ensemble blend,"     543,779","     759,328",0.7194,0.2090
