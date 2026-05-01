@@ -1,0 +1,30 @@
+# =====================================================================
+# Datathon 2026 — Round 1 — Team The Richers
+# Pinned theo môi trường đã verify (Python 3.10+, Windows 10).
+# Cài bằng: pip install -r requirements.txt
+# =====================================================================
+
+# --- Core data stack ---
+pandas==2.2.3
+numpy==2.1.3
+pyarrow==23.0.1
+
+# --- Visualization ---
+matplotlib==3.9.2
+seaborn==0.13.2
+Pillow==11.0.0
+
+# --- Modeling / ML ---
+scikit-learn==1.8.0
+xgboost==3.2.0
+catboost==1.2.10
+shap==0.51.0
+statsmodels==0.14.6
+
+# --- Notebook environment ---
+# Cài `jupyter` (meta package) sẽ kéo về notebook + nbconvert + ipykernel + ...
+# Nếu đã có IDE Jupyter (VS Code, JupyterLab), 4 dòng dưới có thể bỏ.
+jupyter
+ipykernel>=6
+nbconvert>=7
+nbformat>=5
